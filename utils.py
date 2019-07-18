@@ -26,7 +26,8 @@ def load_pickle(path):
 
 
 def write_pickle(o, path):
-  tf.gfile.MakeDirs(path.rsplit('/', 1)[0])
+  if '/' in path:
+    tf.gfile.MakeDirs(path.rsplit('/', 1)[0])
   with tf.gfile.GFile(path, 'wb') as f:
     pickle.dump(o, f, -1)
 
