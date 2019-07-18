@@ -124,7 +124,8 @@ def printable_text(text):
 def load_vocab(vocab_file):
   """Loads a vocabulary file into a dictionary."""
   vocab = collections.OrderedDict()
-  index = 0
+  vocab['UNK'] = 0
+  index = 1
   with tf.gfile.GFile(vocab_file, "r") as reader:
     while True:
       token = convert_to_unicode(reader.readline())
@@ -140,9 +141,11 @@ def convert_by_vocab(vocab, items):
   """Converts a sequence of [tokens|ids] using the vocab."""
   output = []
   for item in items:
-    output.append(vocab[item])
+    try:
+      output.append(vocab[item])
+    except KeyError:
+      output.append(vocab['UNK'])
   return output
-
 
 def convert_tokens_to_ids(vocab, tokens):
   return convert_by_vocab(vocab, tokens)
