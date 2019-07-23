@@ -27,7 +27,7 @@ We provide a script for running BERT over text and writing the resulting
 attention maps to disk.
 The input data should be a [JSON](https://www.json.org/) file containing a
 list of dicts, each one corresponding to a single example to be passed in
-to BERT. Each dict must contain one of the following fields:
+to BERT. Each dict must contain exactly one of the following fields:
 * `"text"`: A string.
 * `"words"`: A list of strings. Needed if you want word-level rather than
 token-level attention.
