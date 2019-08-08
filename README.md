@@ -18,9 +18,11 @@ Additional requirements for the attention analysis:
 ## Attention Analysis
 `Syntax_Analysis.ipynb` and `General_Analysis.ipynb`
 contain code for analyzing BERT's attention, including reproducing the figures and tables in the paper.
+
 You can download the data needed to run the notebooks (including BERT attention maps on Wikipedia
 and the Penn Treebank) from [here](https://drive.google.com/open?id=1DEIBQIl0Q0az5ZuLoy4_lYabIfLSKBg-). However, note that the Penn Treebank annotations are not
 freely available, so the Penn Treebank data only includes dummy labels.
+If you want to run the analysis on your own data, you can use the scripts described below to extract BERT attention maps.
 
 ## Extracting BERT Attention Maps
 We provide a script for running BERT over text and writing the resulting
@@ -57,7 +59,7 @@ The following optional arguments can also be added:
 * `--cased`: Do not lowercase the input text.
 * `--word_level`: Compute word-level instead of token-level attention (see Section 4.1 of the paper).
 
-The feature dicts with added attention maps are written to `<path-to-your-data>_attn.pkl`
+The feature dicts with added attention maps (numpy arrays with shape [n_layers, n_heads_per_layer, n_tokens, n_tokens]) are written to `<path-to-your-data>_attn.pkl`
 
 
 ## Pre-processing Scripts
@@ -91,6 +93,11 @@ python preprocess_depparse.py --data-dir $ATTN_DATA_DIR/depparse
 After pre-processing, you can run `extract_attention.py` to get attention maps, e.g.,
 ```
 python extract_attention.py --preprocessed-data-file $ATTN_DATA_DIR/depparse/dev.json --bert-dir $ATTN_DATA_DIR/uncased_L-12_H-768_A-12 --word_level
+```
+## Computing Distances Between Attention Heads
+`head_distances.py` computes the average Jenson-Shannon divergence between the attention weights of all pairs of attention heads and writes the results to disk as a numpy array of shape [n_heads, n_heads]. These distances can be used to cluster BERT's attention heads (see Section 6 and Figure 6 of the paper; code for doing this clustering is in `General_Analysis.ipynb`). Example usage (requires that attention maps have already been extracted):
+```
+python head_distances.py --attn-data-file $ATTN_DATA_DIR/unlabeled_attn.pkl --outfile $ATTN_DATA_DIR/head_distances.pkl
 ```
 
 ## Citation

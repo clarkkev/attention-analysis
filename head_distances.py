@@ -15,14 +15,14 @@ def main():
                       help="Where to write out the distances between heads.")
   args = parser.parse_args()
 
-  print("Loading data")
+  print("Loading attention data")
   data = utils.load_pickle(args.attn_data_file)
 
+  print("Computing head distances")
   js_distances = np.zeros([144, 144])
-  for i, doc in enumerate(data):
+  for doc in utils.logged_loop(data, n_steps=None):
     if "attns" not in doc:
       continue
-    print(i)
     tokens, attns = doc["tokens"], np.array(doc["attns"])
 
     attns_flat = attns.reshape([144, attns.shape[2], attns.shape[3]])

@@ -32,10 +32,10 @@ def write_pickle(o, path):
     pickle.dump(o, f, -1)
 
 
-def logged_loop(iterable, n=None):
+def logged_loop(iterable, n=None, **kwargs):
   if n is None:
     n = len(iterable)
-  ll = LoopLogger(n)
+  ll = LoopLogger(n, **kwargs)
   for i, elem in enumerate(iterable):
     ll.update(i + 1)
     yield elem
