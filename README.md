@@ -35,6 +35,9 @@ to BERT. Each dict must contain exactly one of the following fields:
 token-level attention.
 * `"tokens"`: A list of strings corresponding to BERT wordpiece tokenization.
 
+If the present field is "tokens," the script expects [CLS]/[SEP] tokens
+to be already added; otherwise it adds these tokens to the
+beginning/end of the text automatically.
 Note that if an example is longer than `max_sequence_length` tokens
 after BERT wordpiece tokenization, attention maps will not be extracted for it.
 Attention extraction adds two additional fields to each dict:
