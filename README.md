@@ -5,6 +5,9 @@ It includes code for getting attention maps from BERT and writing them to disk, 
 We will add the code for the coreference resolution analysis (section 4.3 of the paper) soon!
 
 ## Requirements
+
+Python version: 2.7.16
+
 For extracting attention maps from text:
 * [Tensorflow](https://www.tensorflow.org/)
 * [NumPy](http://www.numpy.org/)
