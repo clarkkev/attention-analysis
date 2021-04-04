@@ -89,11 +89,11 @@ def truncate_seq_pair(tokens_a, tokens_b, max_num_tokens, rng):
 def main():
   parser = argparse.ArgumentParser(description=__doc__)
   parser.add_argument(
-      "--data-file", required=True,
+      "--data_file", required=True,
       help="Location of input data; see the README for expected data format.")
-  parser.add_argument("--bert-dir", required=True,
+  parser.add_argument("--bert_dir", required=True,
                       help="Location of the pre-trained BERT model.")
-  parser.add_argument("--num-docs", default=1000, type=int,
+  parser.add_argument("--num_docs", default=1000, type=int,
                       help="Number of documents to use (default=1000).")
   parser.add_argument("--cased", default=False, action='store_true',
                       help="Don't lowercase the input.")

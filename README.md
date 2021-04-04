@@ -57,6 +57,7 @@ python extract_attention.py --preprocessed_data_file <path-to-your-data> --bert_
 ```
 The following optional arguments can also be added:
 * `--max_sequence_length`: Maximum input sequence length after tokenization (default is 128).
+* `--num_docs`: Number of documents to use (default=1000).
 * `--batch_size`: Batch size when running BERT over examples (default is 16).
 * `--debug`: Use a tiny BERT model for fast debugging.
 * `--cased`: Do not lowercase the input text.
